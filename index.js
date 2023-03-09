@@ -1,7 +1,20 @@
 import express from "express";
-const app = express()
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
+const app = express();
+dotenv.config();
+
+const connect = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URL);
+        console.log("connected to MongoDB")
+    } catch(error) {
+        throw(error);
+    }
+};
 
 app.listen(2121, () => {
+    connect()
     console.log("you are connected")
-})
+});
