@@ -19,7 +19,7 @@ mongoose.connection.on("disconnected", () => {
 })
 
 mongoose.connection.on("connected", () => {
-    console.log("MongoDB Disconnected!")
+    console.log("MongoDB Disconnected")
 })
 
 app.listen(2121, () => {
