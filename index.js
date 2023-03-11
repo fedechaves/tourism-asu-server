@@ -22,6 +22,9 @@ mongoose.connection.on("connected", () => {
     console.log("MongoDB Disconnected")
 })
 
+app.get("/", (req, res) => {
+    res.send("hello")
+})
 app.listen(2121, () => {
     connect()
     console.log("you are connected")
