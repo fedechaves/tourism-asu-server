@@ -1,49 +1,26 @@
 import mongoose from "mongoose";
 
 const RoomSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String,
-        required: true
+        required: true,
     },
-    type: {
-        type: String,
-        required: true
+    price: {
+        type: Number,
+        required: true,
     },
-    city: {
-        type: String,
-        required: true
-    },
-    address: {
-        type: String,
-        required: true
-    },
-    distance: {
-        type: String,
-        required: true
-    },
-    photos: {
-        type: [String],
+    maxPeople: {
+        type: Number,
+        required: true,
     },
     desc: {
         type: String,
         required: true
     },
-    rating: {
-        type: Number,
-        min: 0,
-        max:5
-    },
-    rooms: {
-        type: [String],
-    },
-    cheapestPrice: {
-        type: Number,
-        required: true
-    },
-    feature: {
-        type: Boolean,
-        required: false
-    },
-});
+    roomNumbers: 
+        [{ number: Number, unavailableDates: { type: [Date] }}]
+    ,
+     
+},{ timestamps: true });
 
 export default mongoose.model("Room", RoomSchema);
