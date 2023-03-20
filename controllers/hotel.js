@@ -68,4 +68,32 @@ export const getAllHotels = async (req, res) => {
     }
 };
 
+//GET COUNT BY CITY
+export const countByCity = async (req, res) => {
+    const cities = req.query.cities.split(",")
+    try {
+        const list = await Promise.all(cities.map(city => {
+            // return Hotel.find( { city: city }).length;
+            return Hotel.countDocuments({ city: city })
+        }));
+        res.status(200).json(list);
+
+    }catch(err) {
+        next(err);
+    }
+};
+
+//GET COUNT BY TYPE
+export const countByType = async (req, res) => {
+    const types = req.query.types.split(",")
+    try {
+        const list = await Promise.all(types.map(type => {
+            return Hotel.countDocuments({ type: type })
+        }))
+        res.status(200).json(list);
+
+    }catch(err) {
+        next(err);
+    }
+};
 export default router
