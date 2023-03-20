@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import Hotel from "../models/Hotel.js";
 
 const router = express.Router();
@@ -58,10 +59,11 @@ export const getHotel = async (req, res) => {
 
 //GET ALL
 export const getAllHotels = async (req, res, next) => {
-    const { min, max, featured, ...others } = req.query;
+    const { min, max, ...others } = req.query;
   try {
-    const hotels = await Hotel.find({  featured: featured, cheapestPrice: { $gt: min | 800, $lt: max || 999 } }).limit(req.query.limit);
-    console.log(others)
+    const hotels = await Hotel.find({ 
+        ...others,
+        cheapestPrice:{ $gt: min || 800, $lt: max || 999 }}).limit(req.query.limit);
 
     res.status(200).json(hotels);
   } catch (err) {
