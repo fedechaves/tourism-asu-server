@@ -39,7 +39,7 @@ export const login = async (req, res, next) => {
             httpOnly: true,
         })
         .status(200)
-        .send({...otherDetails})
+        .send({ details: {...otherDetails}, isAdmin})
     }catch(err) {
         next(err)
     }
