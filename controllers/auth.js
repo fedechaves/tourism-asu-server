@@ -31,11 +31,15 @@ export const login = async (req, res, next) => {
         if(!isPasswordCorrect) 
             return next(createError(400, "password or username not matching"));
         
-        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_TOKEN) 
+        const token = jwt.sign(
+            { id: user._id, isAdmin: user.isAdmin },
+            process.env.JWT_TOKEN,
+            { expiresIn: "5d" }
+          ); 
         
         const {password, isAdmin, ...otherDetails} = user._doc;
 
-        res.cookie('access_token', token, {
+        res.cookie('token', token, {
             httpOnly: true,
             sameSite: "none",
             secure: true
