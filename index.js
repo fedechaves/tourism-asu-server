@@ -24,6 +24,10 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
 
+const corsOptions = {
+  origin: true, //included origin as true
+  credentials: true, //included credentials as true
+};
 //middlewares
 app.use(cors())
 app.use(cookieParser())
