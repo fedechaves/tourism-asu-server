@@ -29,7 +29,14 @@ const corsOptions = {
   credentials: true, //included credentials as true
 };
 //middlewares
-app.use(cors())
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}))
 app.use(cookieParser())
 app.use(express.json());
 
